@@ -13,5 +13,6 @@
 - Create AWS ECS Task Definition -> container, called cloudhawk-container (0.5 vCPU, 2 GB RAM, TCP port 3006)
 - Health Check Command: CMD-SHELL curl -f http://localhost:3006 || exit 1
 - Interval: 40, Timeout: 20, Start Period: 20, Retries: 3
-* Create AWS ECS Service (under Cluster)
-+ Type: Fargate, 
+
+* Create AWS ECS Service (under Cluster):  Type: Fargate, Platform Version: latest, # Tasks: 2, Name: cloudhawk-service, Deployment type: Rolling
+* Make sure Security Group allows inbound port 3006
