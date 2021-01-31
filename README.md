@@ -1,10 +1,8 @@
 ## Setup Steps
 
-<li>
-1. Deploy DynamoDB tables
-2. Deploy lambda
-3. Create API Gateway and add trigger to lambda (require ApiKey)
-4. Create ACM certificate 
-5. Link ACM certificate to API Gateway Custom Domain
-6. Add Route53 DNS entries 
-</li>
+* Deploy DynamoDB tables
+* Deploy lambda
+* Create API Gateway and add trigger to lambda (require ApiKey)
+* Create ACM certificate 
+* Link ACM certificate to API Gateway Custom Domain
+* Add Route53 DNS entries 
