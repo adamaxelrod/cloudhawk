@@ -43,7 +43,7 @@ def fetch_versions_for_env(env):
     table = dynamodb.Table(db_version_info)
     response = table.query(KeyConditionExpression=Key('env').eq(env))
     for app in response['Items']:
-        version_list.append({"env": app["env"], "appId": app["appId"], "version": app["version"], "lastStatusPollTime": str(app["statusTime"]), "lastDeployTime": str(app["deployTime"])})
+        version_list.append({"env": app["env"], "appId": app["appId"], "category": app["category"], "version": app["version"], "lastStatusPollTime": str(app["statusTime"]), "lastDeployTime": str(app["deployTime"])})
     return version_list
     
     
