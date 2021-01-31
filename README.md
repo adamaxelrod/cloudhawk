@@ -16,3 +16,7 @@
 
 * Create AWS ECS Service (under Cluster):  Type: Fargate, Platform Version: latest, # Tasks: 2, Name: cloudhawk-service, Deployment type: Rolling
 * Make sure Security Group allows inbound port 3006
+
+* Setup AWS Code Pipeline
+* Setup connection to GitHub
+* Create pipeline and CodeBuild stages, auto-deploy with ECS
