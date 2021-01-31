@@ -14,4 +14,4 @@
 - Health Check Command: CMD-SHELL curl -f http://localhost:3006 || exit 1
 - Interval: 40, Timeout: 20, Start Period: 20, Retries: 3
 * Create AWS ECS Service (under Cluster)
-- Type: Fargate, 
+-- Type: Fargate, 
