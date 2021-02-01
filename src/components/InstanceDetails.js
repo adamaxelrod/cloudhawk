@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 
-class AppDetails extends Component {
+class InstanceDetails extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -27,10 +27,6 @@ class AppDetails extends Component {
 		);
 	};
 
-	hostFormatter = (cell, row) => {
-		return row.hostMap[this.props.env];
-	};
-
 	versionFormatter = (cell, row) => {
 		return (
 			<a
@@ -38,7 +34,7 @@ class AppDetails extends Component {
 				target="_blank"
 				rel="noreferrer"
 			>
-				{row.versionUri}
+				{row.hostScheme + '://' + row.hostMap[this.props.env] + row.versionUri}
 			</a>
 		);
 	};
@@ -50,7 +46,7 @@ class AppDetails extends Component {
 				target="_blank"
 				rel="noreferrer"
 			>
-				{row.dependencyVersionUri}
+				{row.hostScheme + '://' + row.hostMap[this.props.env] + row.dependencyVersionUri}
 			</a>
 		);
 	};
@@ -90,7 +86,7 @@ class AppDetails extends Component {
 		{
 			text: 'URL',
 			dataField: 'hostMap',
-			formatter: this.hostFormatter
+			hidden: true
 		},
 		{
 			text: 'Scheme',
@@ -131,4 +127,4 @@ class AppDetails extends Component {
 	}
 }
 
-export default AppDetails;
+export default InstanceDetails;

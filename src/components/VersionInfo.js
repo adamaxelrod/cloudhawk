@@ -89,7 +89,7 @@ class VersionInfo extends Component {
 	];
 
 	expandRow = {
-		renderer: (row) => <AppDetails appId={row.appId} />,
+		renderer: (row) => <AppDetails env={this.props.env} appId={row.appId} />,
 		showExpandColumn: false,
 		onExpand: (row, isExpand, rowIndex, e) => {
 			this.rowSelectFormat(row, row);
