@@ -3,6 +3,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import AppDetails from './AppDetails';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import * as Constants from '../constants/Constants';
 
 class VersionInfo extends Component {
 	constructor(props) {
@@ -104,11 +105,11 @@ class VersionInfo extends Component {
 	];
 
 	fetchVersions() {
-		fetch('/versions?env=' + this.state.env, {
+		fetch(Constants.VERSIONS_URL + '?env=' + this.state.env, {
 			method: 'GET',
 			headers: {
-				ApiKey: 'pjZ4pSRtCkU1WiPCRIb92jzkJSqKBJ35RJVMiUS6',
-				'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+				ApiKey: Constants.API_KEY,
+				'Content-Type': 'application/json'
 			}
 		})
 			.then((res) => res.json())

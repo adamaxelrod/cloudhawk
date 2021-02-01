@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
+import * as Constants from '../constants/Constants';
 
 class InstanceDetails extends Component {
 	constructor(props) {
@@ -7,7 +8,7 @@ class InstanceDetails extends Component {
 		this.state = {
 			appId: this.props.appId,
 			env: this.props.env,
-			appInfo: []
+			instanceInfo: []
 		};
 	}
 
@@ -51,12 +52,12 @@ class InstanceDetails extends Component {
 		);
 	};
 
-	fetchAppInfo(appId) {
-		fetch('/applications/' + this.state.appId, {
+	fetchInstanceInfo() {
+		fetch(Constants.INSTANCES_URL + '/' + this.state.appId + '?env=' + this.state.env, {
 			method: 'GET',
 			headers: {
-				ApiKey: 'pjZ4pSRtCkU1WiPCRIb92jzkJSqKBJ35RJVMiUS6',
-				'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+				ApiKey: Constants.API_KEY,
+				'Content-Type': 'application/json'
 			}
 		})
 			.then((res) => {
@@ -65,64 +66,40 @@ class InstanceDetails extends Component {
 				}
 			})
 			.then((data) => {
-				if (data != null && data !== '') this.setState({ appInfo: data });
+				if (data != null && data !== '') this.setState({ instanceInfo: data });
 			})
 			.catch(console.log);
 	}
 
 	componentDidMount() {
-		this.fetchAppInfo(this.state.appId);
+		this.fetchInstanceInfo();
 	}
 
 	columns = [
 		{
 			text: 'Application',
-			dataField: 'id'
-		},
-		{
-			text: 'Category',
-			dataField: 'category'
-		},
-		{
-			text: 'URL',
-			dataField: 'hostMap',
+			dataField: 'appId',
 			hidden: true
 		},
 		{
-			text: 'Scheme',
-			dataField: 'hostScheme',
-			hidden: true
-		},
-		{
-			text: 'Port',
-			dataField: 'hostPort',
-			hidden: true
+			text: 'Instance',
+			dataField: 'instance'
 		},
 		{
 			text: 'Version',
-			dataField: 'verionUri',
-			formatter: this.versionFormatter
-		},
-		{
-			text: 'Dependencies',
-			dataField: 'dependencyVersionUri',
-			formatter: this.dependencyFormatter
-		},
-		{
-			text: 'Monitor',
-			dataField: 'monitorUrl',
-			formatter: this.monitorLinkFormatter
-		},
-		{
-			text: 'Build',
-			dataField: 'buildUrl',
-			formatter: this.buildLinkFormatter
+			dataField: 'version'
 		}
 	];
 
 	render() {
 		return (
-			<BootstrapTable condensed bordered={true} keyField="id" columns={this.columns} data={this.state.appInfo} />
+			<BootstrapTable
+				condensed
+				bordered={true}
+				keyField="id"
+				columns={this.columns}
+				data={this.state.instanceInfo}
+			/>
 		);
 	}
 }

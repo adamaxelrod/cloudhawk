@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
+import InstanceDetails from './InstanceDetails';
+import * as Constants from '../constants/Constants';
 
 class AppDetails extends Component {
 	constructor(props) {
@@ -56,11 +58,11 @@ class AppDetails extends Component {
 	};
 
 	fetchAppInfo(appId) {
-		fetch('/applications/' + this.state.appId, {
+		fetch(Constants.APPLICATIONS_URL + '/' + this.state.appId, {
 			method: 'GET',
 			headers: {
-				ApiKey: 'pjZ4pSRtCkU1WiPCRIb92jzkJSqKBJ35RJVMiUS6',
-				'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+				ApiKey: Constants.API_KEY,
+				'Content-Type': 'application/json'
 			}
 		})
 			.then((res) => {
@@ -81,11 +83,13 @@ class AppDetails extends Component {
 	columns = [
 		{
 			text: 'Application',
-			dataField: 'id'
+			dataField: 'id',
+			hidden: true
 		},
 		{
 			text: 'Category',
-			dataField: 'category'
+			dataField: 'category',
+			hidden: true
 		},
 		{
 			text: 'URL',
@@ -126,7 +130,16 @@ class AppDetails extends Component {
 
 	render() {
 		return (
-			<BootstrapTable condensed bordered={true} keyField="id" columns={this.columns} data={this.state.appInfo} />
+			<div>
+				<BootstrapTable
+					condensed
+					bordered={true}
+					keyField="id"
+					columns={this.columns}
+					data={this.state.appInfo}
+				/>
+				<InstanceDetails env={this.state.env} appId={this.state.appId} />
+			</div>
 		);
 	}
 }

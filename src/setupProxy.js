@@ -29,4 +29,13 @@ module.exports = function (app) {
 			securet: false
 		})
 	);
+
+	app.use(
+		'/instances/*',
+		createProxyMiddleware({
+			target: CLOUDHAWK_URL,
+			changeOrigin: true,
+			securet: false
+		})
+	);
 };
