@@ -87,6 +87,7 @@ def load_version_info(env, category, application, version):
      
 def performFlow(argv):
     env = ""
+    envList = []
     try:
         opts, args = getopt.getopt(argv,"e:v",["env="])
     except getopt.GetoptError:
@@ -95,10 +96,14 @@ def performFlow(argv):
     for opt, arg in opts:
         if opt in ("-e", "--env"):
             env = arg
-
-    setEnv(env)            
-    for app in types:
-        fetch_version_info(env, app)
+    if env =='all':
+        envList = ['goldendev', 'goldenqa', 'production']
+    else:
+        envList = [env]
+    for envStr in envList:
+        setEnv(envStr)            
+        for app in types:
+            fetch_version_info(envStr, app)
         
     
 if __name__ == "__main__":
